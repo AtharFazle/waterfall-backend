@@ -17,8 +17,7 @@ class SensorLogController extends Controller
             'kecepatan_angin' => 'required|numeric',
             'debit_air' => 'required|numeric',
             'ketinggian_air' => 'required|numeric',
-            // 'total_pengunjung' => 'nullable|integer',
-            // 'pengunjung_now' => 'nullable|integer',
+            'curah_hujan' => 'required|numeric',
         ]);
 
         $log = SensorLog::create([
@@ -38,7 +37,8 @@ class SensorLogController extends Controller
     {
         $log = SensorLog::orderBy('logged_at', 'desc')->first();
 
-        return response()->json($log);
+        // return response()->json($log);
+        return $this->successResponse($log,'Latest Log Has Been Received');
     }
 
     // [GET] Get logs per day

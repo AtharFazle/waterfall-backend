@@ -8,9 +8,6 @@ use App\Http\Controllers\Api\VisitorLogController;
 use App\Http\Middleware\VerifyIotToken;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -20,17 +17,23 @@ Route::middleware('auth:sanctum')->group(function () {
     // Route::get('/me', [AuthController::class, 'me']);
     Route::post('/images', [ImageController::class, 'upload']);
     Route::get('/images', [ImageController::class, 'index']);
-    
-    Route::get('/sensor-logs/latest', [SensorLogController::class, 'latest']);
-    Route::get('/sensor-logs', [SensorLogController::class, 'byDate']);
-    Route::get('/sensor-logs/hourly', [SensorLogController::class, 'groupedByHour']);
+
 
     Route::get('/visitor-logs', [VisitorLogController::class, 'index']);
     Route::post('/visitor-logs', [VisitorLogController::class, 'store']);
     Route::patch('/visitor-logs/{visitorLog}', [VisitorLogController::class, 'update']);
     Route::post('/visitor-logs/checkout-time/{visitorLog}', [VisitorLogController::class, 'checkoutTime']);
-
+    
 });
+
+Route::get('/visitor-logs/hourly', [VisitorLogController::class, 'hourly']);
+Route::get('/visitor-logs/daily-in', [VisitorLogController::class, 'dailyIn']);
+Route::get('/visitor-logs/daily-out', [VisitorLogController::class, 'dailyOut']);
+
+
+Route::get('/sensor-logs/latest', [SensorLogController::class, 'latest']);
+Route::get('/sensor-logs', [SensorLogController::class, 'byDate']);
+Route::get('/sensor-logs/hourly', [SensorLogController::class, 'groupedByHour']);
 
 Route::prefix('iot')->middleware(VerifyIotToken::class)->group(function () {
     Route::post('data-sensors', [SensorController::class, 'store']);
