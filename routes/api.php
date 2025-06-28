@@ -15,11 +15,15 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     // Route::get('/me', [AuthController::class, 'me']);
-    Route::post('/images', [ImageController::class, 'upload']);
     Route::get('/images', [ImageController::class, 'index']);
+    Route::post('/images', [ImageController::class, 'upload']);
+    Route::put('/images/ordering', [ImageController::class, 'ordering']);
+    Route::post('/images/patch/{image}', [ImageController::class, 'update']);
+    Route::delete('/images/{image}', [ImageController::class, 'destroy']);
 
 
     Route::get('/visitor-logs', [VisitorLogController::class, 'index']);
+    Route::get('/visitor-logs/daily', [VisitorLogController::class, 'daily']);
     Route::post('/visitor-logs', [VisitorLogController::class, 'store']);
     Route::patch('/visitor-logs/{visitorLog}', [VisitorLogController::class, 'update']);
     Route::post('/visitor-logs/checkout-time/{visitorLog}', [VisitorLogController::class, 'checkoutTime']);

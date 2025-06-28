@@ -19,6 +19,13 @@ class VisitorLogController extends Controller
         return response()->json($visitorLogs);
     }
 
+    public function daily(Request $request)
+    {
+        $today = now()->format('Y-m-d');
+        $visitorLogs = VisitorLog::whereDate('check_in_time', $today)->get();
+        return $this->successResponse($visitorLogs, 'Visitor Logs Per Day');
+    }
+
     public function hourly(Request $request)
     {
         $today = now()->format('Y-m-d');
