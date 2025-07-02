@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SensorResources;
 use App\Models\SensorLog;
 use Illuminate\Http\Request;
 
@@ -36,9 +37,8 @@ class SensorLogController extends Controller
     public function latest()
     {
         $log = SensorLog::orderBy('logged_at', 'desc')->first();
-
         // return response()->json($log);
-        return $this->successResponse($log,'Latest Log Has Been Received');
+        return $this->successResponse(new SensorResources($log),'Latest Log Has Been Received');
     }
 
     // [GET] Get logs per day
