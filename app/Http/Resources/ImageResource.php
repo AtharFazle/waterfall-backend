@@ -22,7 +22,7 @@ class ImageResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'order' => $this->order,
-            'isActive' => $this->is_active === 1,
+            'isActive' => $this->is_active == 1,
             'url' => $this->getImageUrl(),
             'uploadDate' => $this->created_at,
         ];
