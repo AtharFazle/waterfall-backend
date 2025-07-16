@@ -16,7 +16,7 @@ class ImageController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
             'title' => 'required|string',
             'description' => 'required|string',
             'order' => 'nullable|integer',
@@ -62,7 +62,7 @@ class ImageController extends Controller
             'description' => 'nullable|string',
             'order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
         ]);
 
         $updateData = [];

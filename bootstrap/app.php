@@ -16,5 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->append(VerifyIotToken::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+            $exceptions->render(function (\Illuminate\Http\Exceptions\PostTooLargeException $e, $request) {
+                    return response()->json([
+                        'error' => 'File terlalu besar',
+                        'message' => 'Ukuran file melebihi batas maksimal'
+                    ], 413);
+            return back()->with('error', 'File terlalu besar. Silakan pilih file yang lebih kecil.');
+        });
     })->create();

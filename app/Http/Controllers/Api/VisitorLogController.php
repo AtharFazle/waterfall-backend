@@ -41,7 +41,7 @@ class VisitorLogController extends Controller
             ->groupBy('hour')
             ->pluck('total', 'hour');
 
-        $data = collect(range(8, 16))->map(function ($hour) use ($checkIns, $checkOuts) {
+        $data = collect(range(0, 24))->map(function ($hour) use ($checkIns, $checkOuts) {
             return [
                 'hour' => str_pad($hour, 2, '0', STR_PAD_LEFT) . ':00',
                 'masuk' => (int) ($checkIns->get($hour, 0)),
